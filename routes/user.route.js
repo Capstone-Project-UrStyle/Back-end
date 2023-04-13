@@ -17,11 +17,7 @@ router.get(
     checkOwnerMiddleware.checkAccountOwner,
     userApiController.showById,
 )
-router.post(
-    '/',
-    checkAuthMiddleware.checkAuth,
-    userApiController.create,
-)
+router.post('/', checkAuthMiddleware.checkAuth, userApiController.create)
 router.patch(
     '/:id',
     checkAuthMiddleware.checkAuth,
