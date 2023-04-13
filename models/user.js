@@ -18,7 +18,6 @@ module.exports = (sequelize, DataTypes) => {
                 },
             },
             password: DataTypes.STRING,
-            role: DataTypes.TINYINT,
             is_verified: DataTypes.BOOLEAN,
             deletedAt: {
                 type: DataTypes.DATE,

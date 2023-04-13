@@ -27,6 +27,9 @@ services:
     restart: always
     image: mysql:8.0
     container_name: mysql
+    volumes:
+      - .docker/mysql:/var/lib/mysql
+      - .docker/data:/data
     ports:
       - "3306:3306"
     environment:
