@@ -2,27 +2,16 @@
 const { Model } = require('sequelize')
 const { toLocaleString } = require(process.cwd() + '/helpers/datetime')
 module.exports = (sequelize, DataTypes) => {
-    class UserInfo extends Model {
+    class Bookmark extends Model {
         static associate(models) {
-            UserInfo.belongsTo(models.User, { foreignKey: 'user_id' })
+            Bookmark.belongsTo(models.User, { foreignKey: 'user_id' })
         }
     }
-    UserInfo.init(
+    Bookmark.init(
         {
             user_id: DataTypes.INTEGER,
-            avatar: DataTypes.STRING,
-            birthday: {
-                type: DataTypes.DATE,
-                get: function () {
-                    if (this.getDataValue('birthday')) {
-                        return toLocaleString(this.getDataValue('birthday'))
-                    }
-                    return null
-                },
-            },
-            address: DataTypes.STRING,
-            phone_number: DataTypes.STRING,
-            gender: DataTypes.BOOLEAN,
+            bookmarked_id: DataTypes.INTEGER,
+            is_outfit: DataTypes.BOOLEAN,
             createdAt: {
                 type: DataTypes.DATE,
                 get: function () {
@@ -44,8 +33,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         {
             sequelize,
-            modelName: 'UserInfo',
+            modelName: 'Bookmark',
         },
     )
-    return UserInfo
+    return Bookmark
 }

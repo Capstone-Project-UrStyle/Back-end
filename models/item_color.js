@@ -1,28 +1,16 @@
 'use strict'
 const { Model } = require('sequelize')
-const { toLocaleString } = require(process.cwd() + '/helpers/datetime')
 module.exports = (sequelize, DataTypes) => {
-    class UserInfo extends Model {
+    class ItemColor extends Model {
         static associate(models) {
-            UserInfo.belongsTo(models.User, { foreignKey: 'user_id' })
+            ItemColor.hasOne(models.Item, { foreignKey: 'item_id' })
+            ItemColor.hasOne(models.Color, { foreignKey: 'color_id' })
         }
     }
-    UserInfo.init(
+    ItemColor.init(
         {
-            user_id: DataTypes.INTEGER,
-            avatar: DataTypes.STRING,
-            birthday: {
-                type: DataTypes.DATE,
-                get: function () {
-                    if (this.getDataValue('birthday')) {
-                        return toLocaleString(this.getDataValue('birthday'))
-                    }
-                    return null
-                },
-            },
-            address: DataTypes.STRING,
-            phone_number: DataTypes.STRING,
-            gender: DataTypes.BOOLEAN,
+            item_id: DataTypes.INTEGER,
+            color_id: DataTypes.INTEGER,
             createdAt: {
                 type: DataTypes.DATE,
                 get: function () {
@@ -44,8 +32,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         {
             sequelize,
-            modelName: 'UserInfo',
+            modelName: 'ItemColor',
         },
     )
-    return UserInfo
+    return ItemColor
 }

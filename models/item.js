@@ -2,27 +2,28 @@
 const { Model } = require('sequelize')
 const { toLocaleString } = require(process.cwd() + '/helpers/datetime')
 module.exports = (sequelize, DataTypes) => {
-    class UserInfo extends Model {
+    class Item extends Model {
         static associate(models) {
-            UserInfo.belongsTo(models.User, { foreignKey: 'user_id' })
+            Item.belongsTo(models.User, { foreignKey: 'user_id' })
+            Item.belongsTo(models.Catefgory, { foreignKey: 'category_id' })
+            Item.belongsToMany(models.Closet, { through: models.ClosetItem })
+            Item.belongsToMany(models.Outfit, { through: models.OutfitItem })
+            Item.belongsToMany(models.Occasion, {
+                through: models.ItemOccasion,
+            })
+            Item.belongsToMany(models.Color, { through: models.ItemColor })
+            Item.belongsToMany(models.Material, {
+                through: models.ItemMaterial,
+            })
+            Item.belongsToMany(models.Pattern, { through: models.ItemPattern })
         }
     }
-    UserInfo.init(
+    Item.init(
         {
             user_id: DataTypes.INTEGER,
-            avatar: DataTypes.STRING,
-            birthday: {
-                type: DataTypes.DATE,
-                get: function () {
-                    if (this.getDataValue('birthday')) {
-                        return toLocaleString(this.getDataValue('birthday'))
-                    }
-                    return null
-                },
-            },
-            address: DataTypes.STRING,
-            phone_number: DataTypes.STRING,
-            gender: DataTypes.BOOLEAN,
+            image: DataTypes.STRING,
+            category_id: DataTypes.INTEGER,
+            brand: DataTypes.STRING,
             createdAt: {
                 type: DataTypes.DATE,
                 get: function () {
@@ -44,8 +45,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         {
             sequelize,
-            modelName: 'UserInfo',
+            modelName: 'Item',
         },
     )
-    return UserInfo
+    return Item
 }

@@ -9,6 +9,7 @@ module.exports = {
                 type: Sequelize.INTEGER,
             },
             name: {
+                allowNull: false,
                 type: Sequelize.STRING,
             },
             email: {
@@ -20,11 +21,8 @@ module.exports = {
                 allowNull: false,
                 type: Sequelize.STRING,
             },
-            role: {
-                allowNull: false,
-                type: Sequelize.TINYINT,
-            },
             is_verified: {
+                allowNull: false,
                 defaultValue: false,
                 type: Sequelize.BOOLEAN,
             },

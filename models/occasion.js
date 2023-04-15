@@ -2,27 +2,22 @@
 const { Model } = require('sequelize')
 const { toLocaleString } = require(process.cwd() + '/helpers/datetime')
 module.exports = (sequelize, DataTypes) => {
-    class UserInfo extends Model {
+    class Occasion extends Model {
         static associate(models) {
-            UserInfo.belongsTo(models.User, { foreignKey: 'user_id' })
+            Occasion.belongsToMany(models.Closet, {
+                through: models.ClosetOccasion,
+            })
+            Occasion.belongsToMany(models.Outfit, {
+                through: models.OutfitOccasion,
+            })
+            Occasion.belongsToMany(models.Item, {
+                through: models.ItemOccasion,
+            })
         }
     }
-    UserInfo.init(
+    Occasion.init(
         {
-            user_id: DataTypes.INTEGER,
-            avatar: DataTypes.STRING,
-            birthday: {
-                type: DataTypes.DATE,
-                get: function () {
-                    if (this.getDataValue('birthday')) {
-                        return toLocaleString(this.getDataValue('birthday'))
-                    }
-                    return null
-                },
-            },
-            address: DataTypes.STRING,
-            phone_number: DataTypes.STRING,
-            gender: DataTypes.BOOLEAN,
+            name: DataTypes.STRING,
             createdAt: {
                 type: DataTypes.DATE,
                 get: function () {
@@ -44,8 +39,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         {
             sequelize,
-            modelName: 'UserInfo',
+            modelName: 'Occasion',
         },
     )
-    return UserInfo
+    return Occasion
 }

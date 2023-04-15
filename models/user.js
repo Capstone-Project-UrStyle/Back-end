@@ -6,6 +6,10 @@ module.exports = (sequelize, DataTypes) => {
         static associate(models) {
             User.hasOne(models.UserInfo, { foreignKey: 'user_id' })
             User.hasOne(models.AuthKey, { foreignKey: 'user_id' })
+            User.hasMany(models.Like, { foreignKey: 'user_id' })
+            User.hasMany(models.Comment, { foreignKey: 'user_id' })
+            User.hasMany(models.Bookmark, { foreignKey: 'user_id' })
+            User.hasMany(models.Closet, { foreignKey: 'user_id' })
         }
     }
     User.init(
