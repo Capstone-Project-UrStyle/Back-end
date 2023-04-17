@@ -15,10 +15,10 @@ module.exports = {
             image: {
                 type: Sequelize.STRING,
             },
-            is_parrent: {
+            is_parent: {
                 type: Sequelize.BOOLEAN,
             },
-            parrent_id: {
+            parent_id: {
                 type: Sequelize.INTEGER,
             },
             createdAt: {

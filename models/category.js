@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {
     Category.init(
         {
             name: DataTypes.STRING,
-            is_parrent: DataTypes.BOOLEAN,
-            parrent_id: DataTypes.INTEGER,
+            is_parent: DataTypes.BOOLEAN,
+            parent_id: DataTypes.INTEGER,
             createdAt: {
                 type: DataTypes.DATE,
                 get: function () {
