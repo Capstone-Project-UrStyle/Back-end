@@ -12,6 +12,7 @@ module.exports = {
                     name: 'Tuan Kiet',
                     email: 'tuankietnk2001@gmail.com',
                     password: hash_helper.hash('bunzz0904'),
+                    is_verified: true,
                 },
             ],
             {},

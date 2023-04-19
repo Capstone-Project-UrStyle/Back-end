@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
             User.hasMany(models.Like, { foreignKey: 'user_id' })
             User.hasMany(models.Comment, { foreignKey: 'user_id' })
             User.hasMany(models.Bookmark, { foreignKey: 'user_id' })
+            User.hasMany(models.Item, { foreignKey: 'user_id' })
             User.hasMany(models.Closet, { foreignKey: 'user_id' })
         }
     }

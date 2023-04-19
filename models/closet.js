@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     }
     Closet.init(
         {
-            user_id: DataTypes.INTERGER,
+            user_id: DataTypes.INTEGER,
             name: DataTypes.STRING,
             is_public: DataTypes.BOOLEAN,
             createdAt: {

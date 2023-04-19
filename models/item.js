@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     class Item extends Model {
         static associate(models) {
             Item.belongsTo(models.User, { foreignKey: 'user_id' })
-            Item.belongsTo(models.Catefgory, { foreignKey: 'category_id' })
+            Item.belongsTo(models.Category, { foreignKey: 'category_id' })
             Item.belongsToMany(models.Closet, { through: models.ClosetItem })
             Item.belongsToMany(models.Outfit, { through: models.OutfitItem })
             Item.belongsToMany(models.Occasion, {
