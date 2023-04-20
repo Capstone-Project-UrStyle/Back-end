@@ -22,20 +22,11 @@ async function register(request, response) {
             })
         }
 
-        // Check if role is valid
-        const dbRole = await getRoleById(request.body.role)
-        if (!dbRole) {
-            return response.status(409).json({
-                message: 'Invalid role!',
-            })
-        }
-
         // Create new user
         const newUser = {
             name: request.body.name,
             email: request.body.email,
             password: hashHelper.hash(request.body.password),
-            role: request.body.role,
         }
 
         // Validate new user's data
@@ -52,16 +43,9 @@ async function register(request, response) {
             // Create new user info
             const newUserInfo = {
                 user_id: result.id,
-                avatar: 'public/images/avatars/user/default-avatar.png',
+                avatar: 'public/images/avatars/default-avatar.png',
             }
             addNewUserInfo(newUserInfo)
-
-            // Create new wallet
-            const newWallet = {
-                user_id: result.id,
-                balance: 0,
-            }
-            addNewWallet(newWallet)
 
             // Send email to verify user
             const authKey = uuid.v1()
@@ -84,7 +68,7 @@ async function register(request, response) {
             addNewAuthKey(newAuthKey)
 
             return response.status(200).json({
-                message: 'Create user successfully!',
+                message: 'Register successfully!',
             })
         })
     } catch (error) {

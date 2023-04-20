@@ -7,7 +7,7 @@ const { getUserByEmail } = require('../CRUD/user')
 async function login(request, response) {
     try {
         // Check if email is registered
-        const dbUser = await getUserByEmail(request.body.email)
+        const dbUser = await getUserByEmail(request.body.email) 
         if (dbUser) {
             // Check if email is verified
             if (!dbUser.is_verified) {
@@ -34,8 +34,7 @@ async function login(request, response) {
             jwt.sign(
                 {
                     userId: dbUser.id,
-                    email: dbUser.email,
-                    role: dbUser.role,
+                    email: dbUser.email
                 },
                 process.env.JWT_SECRET,
                 function (err, token) {

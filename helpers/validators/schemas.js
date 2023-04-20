@@ -2,7 +2,6 @@ const userSchema = {
     name: { type: 'string', optional: true },
     email: { type: 'string', optional: true },
     password: { type: 'string', optional: true },
-    role: { type: 'number', optional: true },
     is_verified: { type: 'boolean', optional: true },
     deleted_at: { type: 'string', optional: true },
 }
