@@ -11,6 +11,14 @@ module.exports = (sequelize, DataTypes) => {
             User.hasMany(models.Bookmark, { foreignKey: 'user_id' })
             User.hasMany(models.Item, { foreignKey: 'user_id' })
             User.hasMany(models.Closet, { foreignKey: 'user_id' })
+            User.hasMany(models.Follow, {
+                foreignKey: 'follower_id',
+                as: 'Followers',
+            })
+            User.hasMany(models.Follow, {
+                foreignKey: 'following_id',
+                as: 'Following',
+            })
         }
     }
     User.init(

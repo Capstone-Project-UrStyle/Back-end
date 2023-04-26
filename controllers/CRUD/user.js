@@ -28,7 +28,6 @@ async function index(startIndex, limit, params) {
                     ? { [Op.not]: null }
                     : { [Op.is]: null }
                 : null,
-        role: params.role !== '' ? params.role : null,
     })
 
     return models.User.findAndCountAll({
@@ -47,7 +46,10 @@ async function index(startIndex, limit, params) {
 }
 
 async function showById(id) {
-    return models.User.findByPk(id, { include: include })
+    return models.User.findByPk(id, {
+        include: include,
+        attributes: { exclude: ['password'] },
+    })
 }
 
 async function showByEmail(email) {

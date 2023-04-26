@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
         {
             user_id: DataTypes.INTEGER,
             avatar: DataTypes.STRING,
+            gender: DataTypes.INTEGER,
             birthday: {
                 type: DataTypes.DATE,
                 get: function () {
@@ -22,7 +23,8 @@ module.exports = (sequelize, DataTypes) => {
             },
             address: DataTypes.STRING,
             phone_number: DataTypes.STRING,
-            gender: DataTypes.BOOLEAN,
+            facebook: DataTypes.STRING,
+            instagram: DataTypes.STRING,
             createdAt: {
                 type: DataTypes.DATE,
                 get: function () {

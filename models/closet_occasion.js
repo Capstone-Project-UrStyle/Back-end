@@ -1,5 +1,6 @@
 'use strict'
 const { Model } = require('sequelize')
+const { toLocaleString } = require(process.cwd() + '/helpers/datetime')
 module.exports = (sequelize, DataTypes) => {
     class ClosetOccasion extends Model {
         static associate(models) {

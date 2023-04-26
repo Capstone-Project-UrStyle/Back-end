@@ -14,6 +14,18 @@ module.exports = {
                     password: hash_helper.hash('bunzz0904'),
                     is_verified: true,
                 },
+                {
+                    name: 'Test User 1',
+                    email: 'testuser1@gmail.com',
+                    password: hash_helper.hash('bunzz0904'),
+                    is_verified: true,
+                },
+                {
+                    name: 'Test User 2',
+                    email: 'testuser2@gmail.com',
+                    password: hash_helper.hash('bunzz0904'),
+                    is_verified: true,
+                },
             ],
             {},
         )
