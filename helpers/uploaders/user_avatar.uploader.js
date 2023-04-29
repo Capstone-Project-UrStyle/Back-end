@@ -2,7 +2,7 @@ const multer = require('multer')
 const path = require('path')
 
 const fs = require('fs')
-const destination = process.cwd() + '/public/images/avatars/user'
+const destination = process.cwd() + '/public/images/avatars'
 
 if (!fs.existsSync(destination)) {
     fs.mkdirSync(destination, { recursive: true })

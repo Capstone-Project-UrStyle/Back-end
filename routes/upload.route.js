@@ -15,4 +15,20 @@ router.post(
     uploadControllers.userAvatarController,
 )
 
+router.post(
+    '/image/item/:id',
+    checkAuthMiddleware.checkAuth,
+    checkOwnerMiddleware.checkAccountOwner,
+    uploadHelpers.itemImageUploader,
+    // uploadControllers.itemImageController,
+)
+
+router.post(
+    '/image/outfit/:id',
+    checkAuthMiddleware.checkAuth,
+    checkOwnerMiddleware.checkAccountOwner,
+    uploadHelpers.outfitImageUploader,
+    // uploadControllers.userAvatarController,
+)
+
 module.exports = router

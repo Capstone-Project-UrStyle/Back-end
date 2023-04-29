@@ -1,35 +1,35 @@
 const path = require('path')
 
 const {
-    getUserInfoByUserId,
-    updateUserInfoByUserId,
-} = require('../../CRUD/user_info')
+    getOutfitById,
+    updateOutfitById,
+} = require('../CRUD/outfit')
 
 async function uploadSingle(request, response) {
     try {
         if (request.file) {
-            const userId = request.params.id
+            const outfitId = request.params.id
 
             // Check if user exists
-            const dbUserInfo = await getUserInfoByUserId(userId)
-            if (dbUserInfo) {
+            const dbOutfit = await getOutfitById(outfitId)
+            if (dbOutfit) {
                 // Update user avatar in database
                 const extName = path.extname(request.file.originalname)
-                const imageUrl = `public/images/avatars/user/${userId}${extName}`
-                const updateUser = {
-                    avatar: imageUrl,
+                const imageUrl = `public/images/outfits/${outfitId}${extName}`
+                const updateOutfit = {
+                    image: imageUrl,
                 }
-                updateUserInfoByUserId(updateUser, dbUserInfo.user_id).then(
+                updateOutfitById(updateOutfit, dbOutfit.id).then(
                     () => {
                         return response.status(200).json({
-                            message: "Upload user's avatar successfully!",
+                            message: "Upload outfit's image successfully!",
                             url: imageUrl,
                         })
                     },
                 )
             } else {
                 return response.status(404).json({
-                    message: 'User info not found!',
+                    message: 'Outfit not found!',
                 })
             }
         } else {
