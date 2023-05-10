@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
         static associate(models) {
             Material.belongsToMany(models.Item, {
                 through: models.ItemMaterial,
+                foreignKey: 'material_id',
             })
         }
     }

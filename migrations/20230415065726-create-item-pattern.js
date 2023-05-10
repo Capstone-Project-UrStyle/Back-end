@@ -12,10 +12,20 @@ module.exports = {
             item_id: {
                 allowNull: false,
                 type: Sequelize.INTEGER,
+                references: {
+                    model: 'Items',
+                    key: 'id',
+                    onDelete: 'CASCADE',
+                },
             },
             pattern_id: {
                 allowNull: false,
                 type: Sequelize.INTEGER,
+                references: {
+                    model: 'Patterns',
+                    key: 'id',
+                    onDelete: 'CASCADE',
+                },
             },
             createdAt: {
                 allowNull: false,

@@ -10,7 +10,10 @@ module.exports = (sequelize, DataTypes) => {
             Outfit.belongsToMany(models.Occasion, {
                 through: models.OutfitOccasion,
             })
-            Outfit.belongsToMany(models.Item, { through: models.OutfitItem })
+            Outfit.belongsToMany(models.Item, {
+                through: models.OutfitItem,
+                foreignKey: 'outfit_id',
+            })
         }
     }
     Outfit.init(

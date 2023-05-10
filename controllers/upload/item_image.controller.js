@@ -1,9 +1,6 @@
 const path = require('path')
 
-const {
-    getItemById,
-    updateItemById,
-} = require('../CRUD/item')
+const { getItemById, updateItemById } = require('../CRUD/item')
 
 async function uploadSingle(request, response) {
     try {
@@ -19,14 +16,12 @@ async function uploadSingle(request, response) {
                 const updateItem = {
                     image: imageUrl,
                 }
-                updateItemById(updateItem, dbItem.id).then(
-                    () => {
-                        return response.status(200).json({
-                            message: "Upload item's image successfully!",
-                            url: imageUrl,
-                        })
-                    },
-                )
+                updateItemById(updateItem, dbItem.id).then(() => {
+                    return response.status(200).json({
+                        message: "Upload item's image successfully!",
+                        url: imageUrl,
+                    })
+                })
             } else {
                 return response.status(404).json({
                     message: 'Item not found!',

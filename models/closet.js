@@ -7,8 +7,12 @@ module.exports = (sequelize, DataTypes) => {
             Closet.belongsTo(models.User, { foreignKey: 'user_id' })
             Closet.belongsToMany(models.Occasion, {
                 through: models.ClosetOccasion,
+                foreignKey: 'closet_id',
             })
-            Closet.belongsToMany(models.Item, { through: models.ClosetItem })
+            Closet.belongsToMany(models.Item, {
+                through: models.ClosetItem,
+                foreignKey: 'closet_id',
+            })
         }
     }
     Closet.init(

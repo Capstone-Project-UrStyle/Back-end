@@ -6,12 +6,15 @@ module.exports = (sequelize, DataTypes) => {
         static associate(models) {
             Occasion.belongsToMany(models.Closet, {
                 through: models.ClosetOccasion,
+                foreignKey: 'occasion_id',
             })
             Occasion.belongsToMany(models.Outfit, {
                 through: models.OutfitOccasion,
+                foreignKey: 'occasion_id',
             })
             Occasion.belongsToMany(models.Item, {
                 through: models.ItemOccasion,
+                foreignKey: 'occasion_id',
             })
         }
     }

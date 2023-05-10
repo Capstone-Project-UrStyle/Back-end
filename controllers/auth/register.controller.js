@@ -7,6 +7,7 @@ const uuid = require('uuid')
 
 const { getUserByEmail, addNewUser } = require('../CRUD/user')
 const { addNewUserInfo } = require('../CRUD/user_info')
+const { addNewCloset } = require('../CRUD/closet')
 const { addNewAuthKey } = require('../CRUD/authkey')
 
 // Mail options
@@ -46,6 +47,14 @@ async function register(request, response) {
                 avatar: 'public/images/avatars/default-avatar.png',
             }
             addNewUserInfo(newUserInfo)
+
+            // Create first closet of user contains all items
+            const newCloset = {
+                user_id: result.id,
+                name: 'All items',
+                is_public: false,
+            }
+            addNewCloset(newCloset)
 
             // Send email to verify user
             const authKey = uuid.v1()

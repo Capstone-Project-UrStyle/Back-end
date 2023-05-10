@@ -4,7 +4,10 @@ const { toLocaleString } = require(process.cwd() + '/helpers/datetime')
 module.exports = (sequelize, DataTypes) => {
     class Color extends Model {
         static associate(models) {
-            Color.belongsToMany(models.Item, { through: models.ItemColor })
+            Color.belongsToMany(models.Item, {
+                through: models.ItemColor,
+                foreignKey: 'color_id',
+            })
         }
     }
     Color.init(

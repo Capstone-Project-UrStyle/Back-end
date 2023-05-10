@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 
-const routes = require('./routes/index')
+const routes = require('./routes')
 
 const app = express()
 
@@ -19,5 +19,6 @@ app.use('/public', express.static('public'))
 app.use('/api/auth', routes.auth)
 app.use('/api/upload', routes.upload)
 app.use('/api/users', routes.user)
+app.use('/api/closets', routes.closet)
 
 module.exports = app

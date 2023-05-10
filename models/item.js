@@ -6,16 +6,30 @@ module.exports = (sequelize, DataTypes) => {
         static associate(models) {
             Item.belongsTo(models.User, { foreignKey: 'user_id' })
             Item.belongsTo(models.Category, { foreignKey: 'category_id' })
-            Item.belongsToMany(models.Closet, { through: models.ClosetItem })
-            Item.belongsToMany(models.Outfit, { through: models.OutfitItem })
+            Item.belongsToMany(models.Closet, {
+                through: models.ClosetItem,
+                foreignKey: 'item_id',
+            })
+            Item.belongsToMany(models.Outfit, {
+                through: models.OutfitItem,
+                foreignKey: 'item_id',
+            })
             Item.belongsToMany(models.Occasion, {
                 through: models.ItemOccasion,
+                foreignKey: 'item_id',
             })
-            Item.belongsToMany(models.Color, { through: models.ItemColor })
+            Item.belongsToMany(models.Color, {
+                through: models.ItemColor,
+                foreignKey: 'item_id',
+            })
             Item.belongsToMany(models.Material, {
                 through: models.ItemMaterial,
+                foreignKey: 'item_id',
             })
-            Item.belongsToMany(models.Pattern, { through: models.ItemPattern })
+            Item.belongsToMany(models.Pattern, {
+                through: models.ItemPattern,
+                foreignKey: 'item_id',
+            })
         }
     }
     Item.init(
