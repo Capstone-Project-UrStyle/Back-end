@@ -21,6 +21,21 @@ module.exports = {
                     name: 'All items',
                     is_public: false,
                 },
+                {
+                    user_id: 1,
+                    name: 'Test closet 1',
+                    is_public: false,
+                },
+                {
+                    user_id: 1,
+                    name: 'Test closet 2',
+                    is_public: false,
+                },
+                {
+                    user_id: 1,
+                    name: 'Test closet 3',
+                    is_public: false,
+                },
             ],
             {},
         )
