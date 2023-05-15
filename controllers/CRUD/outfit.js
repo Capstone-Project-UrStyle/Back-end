@@ -1,7 +1,7 @@
 const models = require(process.cwd() + '/models/index')
 
 async function index() {
-    return models.Outfit.findAndCountAll()
+    return models.Outfit.findAll()
 }
 
 async function showById(outfitId) {

@@ -6,10 +6,6 @@ const userSchema = {
     deleted_at: { type: 'string', optional: true },
 }
 
-const roleSchema = {
-    name: { type: 'string', optional: true },
-}
-
 const userInfoSchema = {
     user_id: { type: 'number', optional: true },
     avatar: { type: 'string', optional: true },
@@ -19,8 +15,14 @@ const userInfoSchema = {
     gender: { type: 'number', optional: true },
 }
 
+const closetSchema = {
+    user_id: { type: 'number', optional: true },
+    name: { type: 'string', optional: true },
+    is_public: { type: 'boolean', optional: true },
+}
+
 module.exports = {
     userSchema: userSchema,
-    roleSchema: roleSchema,
     userInfoSchema: userInfoSchema,
+    closetSchema: closetSchema,
 }

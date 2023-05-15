@@ -18,7 +18,6 @@ async function indexByUserId(request, response) {
 
         return response.status(200).json(dbClosets)
     } catch (error) {
-        console.log(error)
         return response.status(500).json({
             message: 'Something went wrong!',
             error: error,
@@ -61,7 +60,7 @@ async function create(request, response) {
         const newCloset = {
             user_id: request.userData.userId,
             name: request.body.name,
-            is_public: false,
+            is_public: request.body.is_public,
         }
 
         // Validate new user's data

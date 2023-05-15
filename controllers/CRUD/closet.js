@@ -13,7 +13,7 @@ const include = [
     {
         model: models.Item,
         separate: false,
-        order: [['createdAt', 'DESC']],
+        order: [['id', 'ASC']],
         limit: 4,
     },
 ]
@@ -22,7 +22,7 @@ async function indexByUserId(userId) {
     return models.Closet.findAll({
         include: include,
         where: { user_id: userId },
-        order: [['createdAt', 'DESC']],
+        order: [['id', 'ASC']],
     })
 }
 
