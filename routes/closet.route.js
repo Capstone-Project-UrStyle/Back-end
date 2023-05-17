@@ -6,7 +6,7 @@ const closetApiController = require('../controllers/api/closet.controller')
 const router = express.Router()
 
 router.get(
-    '/:userId',
+    '/get-by-user/:userId',
     checkAuthMiddleware.checkAuth,
     checkOwnerMiddleware.checkAccountOwner,
     closetApiController.indexByUserId,

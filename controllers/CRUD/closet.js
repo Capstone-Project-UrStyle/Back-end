@@ -15,6 +15,10 @@ const include = [
         separate: false,
         order: [['id', 'ASC']],
         limit: 4,
+        include: {
+            model: models.Category,
+            attributes: { exclude: ['createdAt', 'updatedAt'] },
+        },
     },
 ]
 
