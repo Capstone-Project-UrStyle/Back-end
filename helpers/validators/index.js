@@ -10,9 +10,12 @@ const validateUserInfo = (userInfo) =>
     validator.validate(userInfo, schemas.userInfoSchema)
 const validateCloset = (closet) =>
     validator.validate(closet, schemas.closetSchema)
+const validateItem = (item) =>
+    validator.validate(item, schemas.itemSchema)
 
 module.exports = {
     validateUser: validateUser,
     validateUserInfo: validateUserInfo,
     validateCloset: validateCloset,
+    validateItem: validateItem,
 }

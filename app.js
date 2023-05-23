@@ -20,6 +20,7 @@ app.use('/api/auth', routes.auth)
 app.use('/api/upload', routes.upload)
 app.use('/api/users', routes.user)
 app.use('/api/closets', routes.closet)
+app.use('/api/items', routes.item)
 app.use('/api/master-data', routes.masterData)
 
 module.exports = app

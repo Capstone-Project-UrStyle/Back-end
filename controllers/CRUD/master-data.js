@@ -12,33 +12,28 @@ async function indexCategories() {
     })
 }
 
-async function createOccasion(newOccassion) {
-    return models.Occasion.create(newOccassion)
-}
-
-async function updateOccasion(updateOccassion, occasionId) {
-    return models.Occasion.update(updateOccassion, {
-        where: { id: occasionId },
+async function indexColors() {
+    return models.Color.findAll({
+        attributes: { exclude: ['createdAt', 'updatedAt'] },
     })
 }
 
-async function destroyOccasion(occasionId) {
-    return models.Occasion.destroy({ where: { id: occasionId } })
+async function indexMaterials() {
+    return models.Material.findAll({
+        attributes: { exclude: ['createdAt', 'updatedAt'] },
+    })
 }
 
-async function checkOccasionNameExisted(name) {
-    return !!(await models.Occasion.findOne({
-        where: {
-            name: name,
-        },
-    }))
+async function indexPatterns() {
+    return models.Pattern.findAll({
+        attributes: { exclude: ['createdAt', 'updatedAt'] },
+    })
 }
 
 module.exports = {
     getAllOccasions: indexOccasions,
     getAllCategories: indexCategories,
-    addNewOccasion: createOccasion,
-    updateOccasionById: updateOccasion,
-    deleteOccasionById: destroyOccasion,
-    checkNameExisted: checkOccasionNameExisted,
+    getAllColors: indexColors,
+    getAllMaterials: indexMaterials,
+    getAllPatterns: indexPatterns,
 }

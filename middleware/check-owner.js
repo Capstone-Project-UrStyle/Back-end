@@ -1,4 +1,5 @@
 const { checkIsClosetOwner } = require('../controllers/CRUD/closet')
+const { checkIsItemOwner } = require('../controllers/CRUD/item')
 
 async function checkAccountOwner(request, response, next) {
     try {
@@ -36,7 +37,26 @@ async function checkClosetOwner(request, response, next) {
     }
 }
 
+async function checkItemOwner(request, response, next) {
+    try {
+        const itemId = request.params.id
+        const requestUserId = request.userData.userId
+
+        if (!checkIsItemOwner(itemId, requestUserId)) {
+            return response.status(400).json({
+                message: 'You are not the owner of this item!',
+            })
+        } else next()
+    } catch (error) {
+        return response.status(401).json({
+            message: 'Something went wrong!',
+            error: error,
+        })
+    }
+}
+
 module.exports = {
     checkAccountOwner: checkAccountOwner,
     checkClosetOwner: checkClosetOwner,
+    checkItemOwner: checkItemOwner,
 }

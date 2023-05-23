@@ -100,8 +100,8 @@ async function updateById(request, response) {
     try {
         const closetId = request.params.id
 
-        // Check if user exists
-        const dbCloset = await getUserById(closetId)
+        // Check if closet exists
+        const dbCloset = await getClosetById(closetId)
         if (dbCloset) {
             // Update closet's data
             const updateCloset = {

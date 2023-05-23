@@ -21,8 +21,14 @@ const closetSchema = {
     is_public: { type: 'boolean', optional: true },
 }
 
+const itemSchema = {
+    category_id: { type: 'number', optional: true },
+    brand: { type: 'string', optional: true },
+}
+
 module.exports = {
     userSchema: userSchema,
     userInfoSchema: userInfoSchema,
     closetSchema: closetSchema,
+    itemSchema: itemSchema,
 }
