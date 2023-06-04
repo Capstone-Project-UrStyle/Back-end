@@ -1,9 +1,6 @@
 const validators = require(process.cwd() + '/helpers/validators')
 
-const {
-    getItemById,
-    updateItemById,
-} = require('../CRUD/item')
+const { getItemById, updateItemById } = require('../CRUD/item')
 
 async function showById(request, response) {
     try {
@@ -62,11 +59,7 @@ async function updateById(request, response) {
 
             // Update color associations
             const colorIds = request.body.color_ids
-            if (
-                colorIds &&
-                Array.isArray(colorIds) &&
-                colorIds.length > 0
-            ) {
+            if (colorIds && Array.isArray(colorIds) && colorIds.length > 0) {
                 await dbItem.setColors(colorIds)
             }
 
@@ -99,7 +92,7 @@ async function updateById(request, response) {
             })
         }
     } catch (error) {
-        console.log(error);
+        console.log(error)
         return response.status(500).json({
             message: 'Something went wrong!',
             error: error,

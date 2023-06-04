@@ -54,6 +54,13 @@ async function showById(itemId) {
     })
 }
 
+async function showByIds(itemIds) {
+    return models.Item.findAll({
+        include: include,
+        where: { id: itemIds },
+    })
+}
+
 async function create(newItem) {
     return models.Item.create(newItem)
 }
@@ -77,6 +84,7 @@ async function checkIsItemOwner(itemId, userId) {
 
 module.exports = {
     getItemById: showById,
+    getListItemsById: showByIds,
     addNewItem: create,
     updateItemById: update,
     deleteItemById: destroy,

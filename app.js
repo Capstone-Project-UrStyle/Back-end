@@ -22,5 +22,6 @@ app.use('/api/users', routes.user)
 app.use('/api/closets', routes.closet)
 app.use('/api/items', routes.item)
 app.use('/api/master-data', routes.masterData)
+app.use('/api/lstm-model/', routes.lstmModel)
 
 module.exports = app

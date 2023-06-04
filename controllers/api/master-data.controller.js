@@ -1,4 +1,10 @@
-const { getAllOccasions, getAllCategories, getAllColors, getAllMaterials, getAllPatterns } = require('../CRUD/master-data')
+const {
+    getAllOccasions,
+    getAllCategories,
+    getAllColors,
+    getAllMaterials,
+    getAllPatterns,
+} = require('../CRUD/master-data')
 
 async function index(request, response) {
     try {
