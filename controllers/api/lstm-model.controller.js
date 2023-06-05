@@ -1,6 +1,7 @@
 const axios = require('axios')
 
 const { getUserById } = require('../CRUD/user')
+const { getClosetById } = require('../CRUD/closet')
 const { getListItemsById } = require('../CRUD/item')
 const { getAllCategories } = require('../CRUD/master-data')
 
@@ -56,19 +57,20 @@ async function getOutfitRecommendation(request, response) {
                 queryKeywordsArray.push(queryKeyword)
             }
 
-            // Call flask server API
+            // Call flask server API to get recommended outfits
             const recommendationResults = await axios.post(
                 `${process.env.AI_SERVER_URL}/generate-outfit-recommendation`,
                 {
                     query_item_image_paths: dbQueryItems.map(
                         (item) => item.image,
-                    ),
-                    query_keywords: queryKeywordsArray,
+                    ) || [],
+                    query_keywords: queryKeywordsArray || [],
                 },
-            ).data
-
-            // Return recommend outfits
-            return response.status(200).json(recommendationResults)
+            )
+            if (recommendationResults.status === 200) {
+                // Return recommend outfits
+                return response.status(200).json(recommendationResults.data)
+            }
         } else {
             return response.status(404).json({
                 message: 'Item not found!',
@@ -88,9 +90,29 @@ async function getOutfitCompatibility(request, response) {
         const limit = request.body.limit
 
         // Get closet data include all closet's items
+        const dbCloset = await getClosetById(closetId)
+        
+        if (dbCloset) {
+            const closetItems = dbCloset.Items
 
-        // Return recommend outfits with descending scores
-        return response.status(200).json({})
+            // Call flask server API to get all possible outfits compatibility
+            const outfitCompatibilityResults = await axios.post(
+                `${process.env.AI_SERVER_URL}/predict-fashion-compatibility`,
+                {
+                    items: closetItems || [],
+                    limit: limit || 5, // Default limit is 5
+                },
+            )
+
+            if (outfitCompatibilityResults.status === 200) {
+                // Return recommend outfits with descending scores
+                return response.status(200).json(outfitCompatibilityResults.data)
+            }
+        } else {
+            return response.status(404).json({
+                message: 'Closet not found!',
+            })
+        }
     } catch (error) {
         return response.status(500).json({
             message: 'Something went wrong!',
