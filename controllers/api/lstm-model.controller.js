@@ -61,9 +61,8 @@ async function getOutfitRecommendation(request, response) {
             const recommendationResults = await axios.post(
                 `${process.env.AI_SERVER_URL}/generate-outfit-recommendation`,
                 {
-                    query_item_image_paths: dbQueryItems.map(
-                        (item) => item.image,
-                    ) || [],
+                    query_item_image_paths:
+                        dbQueryItems.map((item) => item.image) || [],
                     query_keywords: queryKeywordsArray || [],
                 },
             )
@@ -91,7 +90,7 @@ async function getOutfitCompatibility(request, response) {
 
         // Get closet data include all closet's items
         const dbCloset = await getClosetById(closetId)
-        
+
         if (dbCloset) {
             const closetItems = dbCloset.Items
 
@@ -106,7 +105,9 @@ async function getOutfitCompatibility(request, response) {
 
             if (outfitCompatibilityResults.status === 200) {
                 // Return recommend outfits with descending scores
-                return response.status(200).json(outfitCompatibilityResults.data)
+                return response
+                    .status(200)
+                    .json(outfitCompatibilityResults.data)
             }
         } else {
             return response.status(404).json({

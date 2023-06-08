@@ -1,4 +1,5 @@
 const path = require('path')
+const axios = require('axios')
 
 const { getItemById, updateItemById } = require('../CRUD/item')
 
@@ -10,12 +11,21 @@ async function uploadSingle(request, response) {
             // Check if user exists
             const dbItem = await getItemById(itemId)
             if (dbItem) {
-                // Update user avatar in database
                 const extName = path.extname(request.file.originalname)
                 const imageUrl = `public/images/items/${itemId}${extName}`
                 const updateItem = {
                     image: imageUrl,
                 }
+
+                // Call flask server API to extract new image features
+                axios.post(
+                    `${process.env.AI_SERVER_URL}/extract-new-item-image-features`,
+                    {
+                        new_item_image_path: imageUrl,
+                    },
+                )
+
+                // Update user avatar in database
                 updateItemById(updateItem, dbItem.id).then(() => {
                     return response.status(200).json({
                         message: "Upload item's image successfully!",

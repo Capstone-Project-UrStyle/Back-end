@@ -18,15 +18,15 @@ router.post(
 router.post(
     '/image/item/:id',
     checkAuthMiddleware.checkAuth,
-    checkOwnerMiddleware.checkAccountOwner,
+    checkOwnerMiddleware.checkItemOwner,
     uploadHelpers.itemImageUploader,
-    // uploadControllers.itemImageController,
+    uploadControllers.itemImageController,
 )
 
 router.post(
     '/image/outfit/:id',
     checkAuthMiddleware.checkAuth,
-    checkOwnerMiddleware.checkAccountOwner,
+    checkOwnerMiddleware.checkOutfitOwner,
     uploadHelpers.outfitImageUploader,
     // uploadControllers.userAvatarController,
 )

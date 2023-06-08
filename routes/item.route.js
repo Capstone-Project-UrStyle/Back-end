@@ -11,7 +11,7 @@ router.get(
     checkOwnerMiddleware.checkItemOwner,
     itemApiController.showById,
 )
-
+router.post('/', checkAuthMiddleware.checkAuth, itemApiController.create)
 router.patch(
     '/:id',
     checkAuthMiddleware.checkAuth,
