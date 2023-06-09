@@ -150,18 +150,18 @@ async function deleteById(request, response) {
     try {
         const closetId = request.params.id
 
-        // Check if user exists
+        // Check if closet exists
         const dbCloset = await getClosetById(closetId)
         if (dbCloset) {
             // Delete closet
             await deleteClosetById(dbCloset.id)
 
             return response.status(200).json({
-                message: 'Delete user successfully!',
+                message: 'Delete closet successfully!',
             })
         } else {
             return response.status(404).json({
-                message: 'User not found!',
+                message: 'Closet not found!',
             })
         }
     } catch (error) {

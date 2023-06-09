@@ -1,6 +1,8 @@
+const fs = require('fs')
+const axios = require('axios')
 const validators = require(process.cwd() + '/helpers/validators')
 
-const { getItemById, addNewItem, updateItemById } = require('../CRUD/item')
+const { getItemById, addNewItem, updateItemById, deleteItemById } = require('../CRUD/item')
 
 async function showById(request, response) {
     try {
@@ -180,8 +182,50 @@ async function updateById(request, response) {
     }
 }
 
+async function deleteById(request, response) {
+    try {
+        const itemId = request.params.id
+
+        // Check if item exists
+        const dbItem = await getItemById(itemId)
+        if (dbItem) {
+            // Delete item image
+            const itemImagePath = process.cwd() + '/' + dbItem.image
+            
+            if (fs.existsSync(itemImagePath)) {
+                fs.unlinkSync(itemImagePath)
+
+                // Call flask server API to remove item image features
+                axios.post(
+                    `${process.env.AI_SERVER_URL}/remove-item-image-features`,
+                    {
+                        item_image_path: dbItem.image,
+                    },
+                )
+            }
+
+            // Delete item from database
+            await deleteItemById(dbItem.id)
+
+            return response.status(200).json({
+                message: 'Delete item successfully!',
+            })
+        } else {
+            return response.status(404).json({
+                message: 'Item not found!',
+            })
+        }
+    } catch (error) {
+        return response.status(500).json({
+            message: 'Something went wrong!',
+            error: error,
+        })
+    }
+}
+
 module.exports = {
     showById: showById,
     create: create,
     updateById: updateById,
+    deleteById: deleteById,
 }

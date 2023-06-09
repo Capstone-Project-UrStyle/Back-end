@@ -15,8 +15,14 @@ router.post('/', checkAuthMiddleware.checkAuth, itemApiController.create)
 router.patch(
     '/:id',
     checkAuthMiddleware.checkAuth,
-    checkOwnerMiddleware.checkClosetOwner,
+    checkOwnerMiddleware.checkItemOwner,
     itemApiController.updateById,
+)
+router.delete(
+    '/:id',
+    checkAuthMiddleware.checkAuth,
+    checkOwnerMiddleware.checkItemOwner,
+    itemApiController.deleteById,
 )
 
 module.exports = router
