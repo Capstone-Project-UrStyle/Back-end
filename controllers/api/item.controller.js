@@ -2,7 +2,12 @@ const fs = require('fs')
 const axios = require('axios')
 const validators = require(process.cwd() + '/helpers/validators')
 
-const { getItemById, addNewItem, updateItemById, deleteItemById } = require('../CRUD/item')
+const {
+    getItemById,
+    addNewItem,
+    updateItemById,
+    deleteItemById,
+} = require('../CRUD/item')
 
 async function showById(request, response) {
     try {
@@ -191,7 +196,7 @@ async function deleteById(request, response) {
         if (dbItem) {
             // Delete item image
             const itemImagePath = process.cwd() + '/' + dbItem.image
-            
+
             if (fs.existsSync(itemImagePath)) {
                 fs.unlinkSync(itemImagePath)
 
@@ -203,6 +208,14 @@ async function deleteById(request, response) {
                     },
                 )
             }
+
+            // Delete all item's associations
+            await dbItem.setOccasions([])
+            await dbItem.setClosets([])
+            await dbItem.setOutfits([])
+            await dbItem.setColors([])
+            await dbItem.setMaterials([])
+            await dbItem.setPatterns([])
 
             // Delete item from database
             await deleteItemById(dbItem.id)
@@ -216,6 +229,7 @@ async function deleteById(request, response) {
             })
         }
     } catch (error) {
+        console.log(error)
         return response.status(500).json({
             message: 'Something went wrong!',
             error: error,

@@ -12,6 +12,12 @@ router.get(
     closetApiController.indexByUserId,
 )
 router.get(
+    '/get-all-item-closet-by-user/:userId',
+    checkAuthMiddleware.checkAuth,
+    checkOwnerMiddleware.checkAccountOwner,
+    closetApiController.showAllItemClosetByUserId,
+)
+router.get(
     '/:id',
     checkAuthMiddleware.checkAuth,
     checkOwnerMiddleware.checkClosetOwner,

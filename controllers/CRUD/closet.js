@@ -30,6 +30,13 @@ async function indexByUserId(userId) {
     })
 }
 
+async function showAllItemClosetByUserId(userId) {
+    return models.Closet.findOne({
+        include: include,
+        where: { user_id: userId, name: 'All items' },
+    })
+}
+
 async function showById(closetId) {
     return models.Closet.findOne({
         include: include,
@@ -45,8 +52,8 @@ async function update(updateCloset, closetId) {
     return models.Closet.update(updateCloset, { where: { id: closetId } })
 }
 
-async function destroy(outfitId) {
-    return models.Closet.destroy({ where: { id: outfitId } })
+async function destroy(closetId) {
+    return models.Closet.destroy({ where: { id: closetId } })
 }
 
 async function checkNameExisted(name) {
@@ -68,6 +75,7 @@ async function checkIsClosetOwner(closetId, userId) {
 
 module.exports = {
     getListClosetsByUserId: indexByUserId,
+    getAllItemClosetByUserId: showAllItemClosetByUserId,
     getClosetById: showById,
     addNewCloset: create,
     updateClosetById: update,

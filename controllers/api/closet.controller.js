@@ -2,6 +2,7 @@ const validators = require(process.cwd() + '/helpers/validators')
 
 const {
     getListClosetsByUserId,
+    getAllItemClosetByUserId,
     getClosetById,
     addNewCloset,
     updateClosetById,
@@ -15,6 +16,22 @@ async function indexByUserId(request, response) {
 
         // Get all closets that user own
         const dbClosets = await getListClosetsByUserId(userId)
+
+        return response.status(200).json(dbClosets)
+    } catch (error) {
+        return response.status(500).json({
+            message: 'Something went wrong!',
+            error: error,
+        })
+    }
+}
+
+async function showAllItemClosetByUserId(request, response) {
+    try {
+        const userId = request.params.userId
+
+        // Get all item closet of this user
+        const dbClosets = await getAllItemClosetByUserId(userId)
 
         return response.status(200).json(dbClosets)
     } catch (error) {
@@ -120,6 +137,12 @@ async function updateById(request, response) {
 
             updateClosetById(updateCloset, dbCloset.id)
 
+            // Update item associations
+            const itemIds = request.body.item_ids
+            if (itemIds && Array.isArray(itemIds) && itemIds.length > 0) {
+                await dbCloset.setItems(itemIds)
+            }
+
             // Update occasion associations
             const occasionIds = request.body.occasion_ids
             if (
@@ -153,6 +176,10 @@ async function deleteById(request, response) {
         // Check if closet exists
         const dbCloset = await getClosetById(closetId)
         if (dbCloset) {
+            // Delete all closet's associations
+            await dbCloset.setOccasions([])
+            await dbCloset.setItems([])
+
             // Delete closet
             await deleteClosetById(dbCloset.id)
 
@@ -174,6 +201,7 @@ async function deleteById(request, response) {
 
 module.exports = {
     indexByUserId: indexByUserId,
+    showAllItemClosetByUserId: showAllItemClosetByUserId,
     showById: showById,
     create: create,
     updateById: updateById,
