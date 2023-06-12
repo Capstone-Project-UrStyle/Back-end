@@ -4,7 +4,6 @@ const include = [
     {
         model: models.User,
         attributes: { exclude: ['password', 'updatedAt'] },
-        required: true,
     },
     {
         model: models.Category,

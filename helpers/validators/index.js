@@ -11,10 +11,13 @@ const validateUserInfo = (userInfo) =>
 const validateCloset = (closet) =>
     validator.validate(closet, schemas.closetSchema)
 const validateItem = (item) => validator.validate(item, schemas.itemSchema)
+const validateOUtfit = (outfit) =>
+    validator.validate(outfit, schemas.outfitSchema)
 
 module.exports = {
     validateUser: validateUser,
     validateUserInfo: validateUserInfo,
     validateCloset: validateCloset,
     validateItem: validateItem,
+    validateOUtfit: validateOUtfit,
 }

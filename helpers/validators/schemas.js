@@ -26,9 +26,18 @@ const itemSchema = {
     brand: { type: 'string', optional: true },
 }
 
+const outfitSchema = {
+    user_id: { type: 'number', optional: true },
+    image: { type: 'string', optional: true },
+    selfies: { type: 'string', optional: true },
+    description: { type: 'string', optional: true },
+    is_public: { type: 'boolean', optional: true },
+}
+
 module.exports = {
     userSchema: userSchema,
     userInfoSchema: userInfoSchema,
     closetSchema: closetSchema,
     itemSchema: itemSchema,
+    outfitSchema: outfitSchema,
 }

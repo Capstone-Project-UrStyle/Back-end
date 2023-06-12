@@ -1,7 +1,41 @@
 const models = require(process.cwd() + '/models/index')
 
-async function index() {
-    return models.Outfit.findAll()
+const include = [
+    {
+        model: models.User,
+        attributes: { exclude: ['password', 'updatedAt'] },
+        required: true,
+    },
+    {
+        model: models.Like,
+        required: true,
+    },
+    {
+        model: models.Comment,
+        required: true,
+    },
+    {
+        model: models.Occasion,
+        separate: false,
+    },
+    {
+        model: models.Item,
+        separate: false,
+        order: [['id', 'ASC']],
+        limit: 4,
+        include: {
+            model: models.Category,
+            attributes: { exclude: ['createdAt', 'updatedAt'] },
+        },
+    },
+]
+
+async function indexByUserId(userId) {
+    return models.Outfit.findAll({
+        include: include,
+        where: { user_id: userId },
+        order: [['id', 'ASC']],
+    })
 }
 
 async function showById(outfitId) {
@@ -21,7 +55,7 @@ async function destroy(outfitId) {
 }
 
 async function checkIsOutfitOwner(itemId, userId) {
-    return !!(await models.Item.findOne({
+    return !!(await models.Outfit.findOne({
         where: {
             id: itemId,
             user_id: userId,
@@ -30,7 +64,7 @@ async function checkIsOutfitOwner(itemId, userId) {
 }
 
 module.exports = {
-    index: index,
+    getListOutfitsByUserId: indexByUserId,
     getOutfitById: showById,
     addNewOutfit: create,
     updateOutfitById: update,

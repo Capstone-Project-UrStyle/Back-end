@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
             Outfit.hasMany(models.Comment, { foreignKey: 'outfit_id' })
             Outfit.belongsToMany(models.Occasion, {
                 through: models.OutfitOccasion,
+                foreignKey: 'outfit_id',
             })
             Outfit.belongsToMany(models.Item, {
                 through: models.OutfitItem,
