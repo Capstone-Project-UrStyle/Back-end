@@ -10,7 +10,7 @@ async function uploadSingle(request, response) {
             // Check if user exists
             const dbOutfit = await getOutfitById(outfitId)
             if (dbOutfit) {
-                // Update user avatar in database
+                // Update outfit image in database
                 const extName = path.extname(request.file.originalname)
                 const imageUrl = `public/images/outfits/${outfitId}${extName}`
                 const updateOutfit = {

@@ -28,7 +28,7 @@ router.post(
     checkAuthMiddleware.checkAuth,
     checkOwnerMiddleware.checkOutfitOwner,
     uploadHelpers.outfitImageUploader,
-    // uploadControllers.userAvatarController,
+    uploadControllers.outfitImageController,
 )
 
 module.exports = router

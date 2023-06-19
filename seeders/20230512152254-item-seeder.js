@@ -100,7 +100,10 @@ module.exports = {
         let jsonItems = []
 
         try {
-            const jsonFile = await fs.promises.readFile('data/test_no_dup.json', 'utf8')
+            const jsonFile = await fs.promises.readFile(
+                'data/test_no_dup.json',
+                'utf8',
+            )
             const outfitData = JSON.parse(jsonFile)
 
             let imageIndex = 0
@@ -112,11 +115,7 @@ module.exports = {
 
                     // Find parent category id if json category id identified
                     identified.forEach((object) => {
-                        if (
-                            object.json_category_id.includes(
-                                item.categoryid,
-                            )
-                        ) {
+                        if (object.json_category_id.includes(item.categoryid)) {
                             const dbChildCategories =
                                 dbCategories[object.parent_id]
                             const randomChildCategoryId =

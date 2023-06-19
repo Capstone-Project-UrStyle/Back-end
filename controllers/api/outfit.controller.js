@@ -50,7 +50,7 @@ async function create(request, response) {
         // Create new outfit
         const newOutfit = {
             user_id: request.userData.userId,
-            description: request.body.name,
+            description: request.body.description,
             is_public: request.body.is_public,
         }
 
@@ -83,9 +83,11 @@ async function create(request, response) {
 
             return response.status(200).json({
                 message: 'Create outfit successfully!',
+                outfitId: result.id,
             })
         })
     } catch (error) {
+        console.log(error)
         return response.status(500).json({
             message: 'Something went wrong!',
             error: error,

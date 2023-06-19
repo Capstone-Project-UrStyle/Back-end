@@ -15,7 +15,7 @@ module.exports = {
                     image: 'public/images/icons/materials/Polyester.png',
                 },
                 {
-                    name: 'Fir',
+                    name: 'Fur',
                     image: 'public/images/icons/materials/Fir.png',
                 },
                 {
