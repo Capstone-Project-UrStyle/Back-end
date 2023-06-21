@@ -4,13 +4,13 @@ const lstmModelController = require('../controllers/api/lstm-model.controller')
 
 const router = express.Router()
 
-router.get(
+router.post(
     '/generate-outfit-recommendation',
     checkAuthMiddleware.checkAuth,
     lstmModelController.getOutfitRecommendation,
 )
 
-router.get(
+router.post(
     '/predict-fashion-compatibility',
     checkAuthMiddleware.checkAuth,
     lstmModelController.getOutfitCompatibility,

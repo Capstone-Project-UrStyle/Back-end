@@ -2,11 +2,12 @@ const axios = require('axios')
 
 const { getUserById } = require('../CRUD/user')
 const { getClosetById } = require('../CRUD/closet')
-const { getListItemsById } = require('../CRUD/item')
+const { getListItemsById, getListItemsByImageUrl } = require('../CRUD/item')
 const { getAllCategories } = require('../CRUD/master-data')
 
 async function getOutfitRecommendation(request, response) {
     try {
+        console.log(request.body)
         const queryItemIds = request.body.query_item_ids
         const queryKeywords = request.body.query_keywords
 
@@ -68,7 +69,11 @@ async function getOutfitRecommendation(request, response) {
             )
             if (recommendationResults.status === 200) {
                 // Return recommend outfits
-                return response.status(200).json(recommendationResults.data)
+                const recommendItems = await getListItemsByImageUrl(
+                    recommendationResults.data,
+                )
+
+                return response.status(200).json(recommendItems)
             }
         } else {
             return response.status(404).json({
@@ -76,6 +81,7 @@ async function getOutfitRecommendation(request, response) {
             })
         }
     } catch (error) {
+        console.log(error)
         return response.status(500).json({
             message: 'Something went wrong!',
             error: error,

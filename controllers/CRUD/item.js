@@ -60,6 +60,13 @@ async function showByIds(itemIds) {
     })
 }
 
+async function showByImageUrls(imageUrls) {
+    return models.Item.findAll({
+        include: include,
+        where: { image: imageUrls },
+    })
+}
+
 async function create(newItem) {
     return models.Item.create(newItem)
 }
@@ -84,6 +91,7 @@ async function checkIsItemOwner(itemId, userId) {
 module.exports = {
     getItemById: showById,
     getListItemsById: showByIds,
+    getListItemsByImageUrl: showByImageUrls,
     addNewItem: create,
     updateItemById: update,
     deleteItemById: destroy,
