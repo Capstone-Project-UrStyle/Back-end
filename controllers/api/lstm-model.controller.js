@@ -7,7 +7,6 @@ const { getAllCategories } = require('../CRUD/master-data')
 
 async function getOutfitRecommendation(request, response) {
     try {
-        console.log(request.body)
         const queryItemIds = request.body.query_item_ids
         const queryKeywords = request.body.query_keywords
 

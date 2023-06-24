@@ -8,11 +8,9 @@ const include = [
     },
     {
         model: models.Like,
-        required: true,
     },
     {
         model: models.Comment,
-        required: true,
     },
     {
         model: models.Occasion,
@@ -39,7 +37,7 @@ async function indexByUserId(userId) {
 }
 
 async function showById(outfitId) {
-    return models.Outfit.findOne({ where: { id: outfitId } })
+    return models.Outfit.findOne({ include: include, where: { id: outfitId } })
 }
 
 async function create(newOutfit) {
