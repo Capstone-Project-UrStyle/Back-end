@@ -100,7 +100,7 @@ async function updateById(request, response) {
         const outfitId = request.params.id
 
         // Check if outfit exists
-        const dbOutfit = await getClosetById(outfitId)
+        const dbOutfit = await getOutfitById(outfitId)
         if (dbOutfit) {
             // Update outfit's data
             const updateOutfit = {
