@@ -5,7 +5,7 @@ const { getClosetById } = require('../CRUD/closet')
 const { getListItemsById, getListItemsByImageUrl } = require('../CRUD/item')
 const { getAllCategories } = require('../CRUD/master-data')
 
-async function getOutfitRecommendation(request, response) {
+async function getItemRecommendations(request, response) {
     try {
         const queryItemIds = request.body.query_item_ids
         const queryKeywords = request.body.query_keywords
@@ -59,7 +59,7 @@ async function getOutfitRecommendation(request, response) {
 
             // Call flask server API to get recommended outfits
             const recommendationResults = await axios.post(
-                `${process.env.AI_SERVER_URL}/generate-outfit-recommendation`,
+                `${process.env.AI_SERVER_URL}/generate-item-recommendations`,
                 {
                     query_item_image_paths:
                         dbQueryItems.map((item) => item.image) || [],
@@ -88,7 +88,7 @@ async function getOutfitRecommendation(request, response) {
     }
 }
 
-async function getOutfitCompatibility(request, response) {
+async function getOutfitRecommendations(request, response) {
     try {
         const closetId = request.body.closet_id
         const limit = request.body.limit
@@ -101,7 +101,7 @@ async function getOutfitCompatibility(request, response) {
 
             // Call flask server API to get all possible outfits compatibility
             const outfitCompatibilityResults = await axios.post(
-                `${process.env.AI_SERVER_URL}/predict-fashion-compatibility`,
+                `${process.env.AI_SERVER_URL}/generate-outfit-recommendations`,
                 {
                     items: closetItems || [],
                     limit: limit || 5, // Default limit is 5
@@ -128,6 +128,6 @@ async function getOutfitCompatibility(request, response) {
 }
 
 module.exports = {
-    getOutfitRecommendation: getOutfitRecommendation,
-    getOutfitCompatibility: getOutfitCompatibility,
+    getItemRecommendations: getItemRecommendations,
+    getOutfitRecommendations: getOutfitRecommendations,
 }

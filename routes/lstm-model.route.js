@@ -5,15 +5,15 @@ const lstmModelController = require('../controllers/api/lstm-model.controller')
 const router = express.Router()
 
 router.post(
-    '/generate-outfit-recommendation',
+    '/generate-item-recommendations',
     checkAuthMiddleware.checkAuth,
-    lstmModelController.getOutfitRecommendation,
+    lstmModelController.getItemRecommendations,
 )
 
 router.post(
-    '/predict-fashion-compatibility',
+    '/generate-outfit-recommendations',
     checkAuthMiddleware.checkAuth,
-    lstmModelController.getOutfitCompatibility,
+    lstmModelController.getOutfitRecommendations,
 )
 
 module.exports = router
