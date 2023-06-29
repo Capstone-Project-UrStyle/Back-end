@@ -25,7 +25,7 @@ const createSubject = (option) => {
 const createContent = (email, option, authKey) => {
     if (option == VERIFY_EMAIL) {
         return `
-            <h3>Welcome ${email}! You have just created a new account for our website!</h3>
+            <h3>Welcome ${email}! You have just created a new account for our app!</h3>
             <br>
             <p>Click here to verify your email and start using our services:</p> 
             <a href='${process.env.WEB_URL}/api/auth/verify-email/${email}/${authKey}'>Verify your email</a>
@@ -35,7 +35,7 @@ const createContent = (email, option, authKey) => {
             <p>If you not doing this, you can just ignore this message!</p>
             <br>
             <p>Thank you,</p>
-            <p>--- VeXeDienTuBKDN - AwesomeDevTeam ---</p>
+            <p>--- UrStyle ---</p>
             `
     }
 
@@ -51,7 +51,7 @@ const createContent = (email, option, authKey) => {
             <p>If you not doing this, you can just ignore this message!</p>
             <br>
             <p>Thank you,</p>
-            <p>--- VeXeDienTuBKDN - AwesomeDevTeam ---</p>
+            <p>--- UrStyle ---</p>
             `
     }
 }
