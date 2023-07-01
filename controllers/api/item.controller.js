@@ -179,7 +179,6 @@ async function updateById(request, response) {
             })
         }
     } catch (error) {
-        console.log(error)
         return response.status(500).json({
             message: 'Something went wrong!',
             error: error,

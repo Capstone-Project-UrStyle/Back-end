@@ -16,7 +16,7 @@ module.exports = {
                 },
                 {
                     name: 'Fur',
-                    image: 'public/images/icons/materials/Fir.png',
+                    image: 'public/images/icons/materials/Fur.png',
                 },
                 {
                     name: 'Tweed',
