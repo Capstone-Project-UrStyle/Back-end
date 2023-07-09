@@ -32,7 +32,7 @@ async function indexByUserId(userId) {
     return models.Outfit.findAll({
         include: include,
         where: { user_id: userId },
-        order: [['id', 'ASC']],
+        order: [['id', 'DESC']],
     })
 }
 

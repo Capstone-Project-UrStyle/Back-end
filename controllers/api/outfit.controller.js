@@ -104,7 +104,7 @@ async function updateById(request, response) {
         if (dbOutfit) {
             // Update outfit's data
             const updateOutfit = {
-                description: request.body.name,
+                description: request.body.description,
                 is_public: request.body.is_public,
             }
 
@@ -126,7 +126,7 @@ async function updateById(request, response) {
                 Array.isArray(occasionIds) &&
                 occasionIds.length > 0
             ) {
-                await dbCloset.setOccasions(occasionIds)
+                await dbOutfit.setOccasions(occasionIds)
             }
 
             // Update item associations
